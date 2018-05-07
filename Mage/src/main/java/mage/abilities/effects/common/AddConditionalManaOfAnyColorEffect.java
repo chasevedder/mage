@@ -63,10 +63,10 @@ public class AddConditionalManaOfAnyColorEffect extends ManaEffect {
         staticText = "Add "
                 + (amount instanceof StaticValue ? (CardUtil.numberToText(((StaticValue) amount).toString())) : "")
                 + " mana "
-                + (oneChoice ? "of any"
-                        + (amount instanceof StaticValue && (((StaticValue) amount).toString()).equals("1") ? "" : " one")
-                        + " color" : "in any combination of colors")
-                + " to your mana pool. " + manaBuilder.getRule();
+                + (oneChoice || (amount instanceof StaticValue && (((StaticValue) amount).toString()).equals("1"))
+                ? "of any" + (amount instanceof StaticValue && (((StaticValue) amount).toString()).equals("1") ? "" : " one") + " color"
+                : "in any combination of colors")
+                + ". " + manaBuilder.getRule();
     }
 
     public AddConditionalManaOfAnyColorEffect(final AddConditionalManaOfAnyColorEffect effect) {

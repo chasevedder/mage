@@ -41,8 +41,11 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.common.TargetLandPermanent;
+import mage.util.SubTypeList;
 
 /**
  * @author anonymous
@@ -64,7 +67,9 @@ public class FendeepSummoner extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {T}: Up to two target Swamps each become 3/5 Treefolk Warrior creatures in addition to their other types until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureTargetEffect(new FendeepSummonerToken(), false, false, Duration.EndOfTurn), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureTargetEffect(
+                new CreatureToken(3, 5, "3/5 Treefolk Warrior", new SubTypeList(SubType.TREEFOLK, SubType.WARRIOR)),
+                false, false, Duration.EndOfTurn), new TapSourceCost());
         ability.addTarget(new TargetLandPermanent(0, 2, filter, false));
         this.addAbility(ability);
     }
@@ -76,17 +81,5 @@ public class FendeepSummoner extends CardImpl {
     @Override
     public FendeepSummoner copy() {
         return new FendeepSummoner(this);
-    }
-}
-
-class FendeepSummonerToken extends Token {
-
-    public FendeepSummonerToken() {
-        super("", "3/5 Treefolk Warrior");
-        this.cardType.add(CardType.CREATURE);
-        this.subtype.add(SubType.TREEFOLK);
-        this.subtype.add(SubType.WARRIOR);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(5);
     }
 }

@@ -39,7 +39,9 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -56,7 +58,9 @@ public class Omnibian extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {T}: Target creature becomes a 3/3 Frog until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureTargetEffect(new OmnibianFrogToken(), false, false, Duration.EndOfTurn), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureTargetEffect(
+                new CreatureToken(3, 3, "3/3 Frog", SubType.FROG),
+                false, false, Duration.EndOfTurn), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -68,15 +72,5 @@ public class Omnibian extends CardImpl {
     @Override
     public Omnibian copy() {
         return new Omnibian(this);
-    }
-}
-
-class OmnibianFrogToken extends Token {
-
-    public OmnibianFrogToken() {
-        super("", "3/3 Frog");
-        this.subtype.add(SubType.FROG);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
     }
 }

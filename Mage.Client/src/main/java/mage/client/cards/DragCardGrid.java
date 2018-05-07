@@ -1083,6 +1083,22 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         }
         repaint();
     }
+    
+    private void chooseMatching() {
+        Collection<CardView> toMatch = dragCardList();
+        
+        for (DragCardGridListener l : listeners) {
+            for (CardView card : allCards) {
+                for (CardView aMatch : toMatch) {
+                    if (card.getName().equals(aMatch.getName())) {
+                        card.setSelected(true);
+                        cardViews.get(card.getId()).update(card);
+                    }
+                }
+            }
+        }
+        repaint();
+    }
 
     private void showAll() {
         for (DragCardGridListener l : listeners) {
@@ -1316,7 +1332,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         repaint();
     }
 
-    private static final Pattern pattern = Pattern.compile(".*Add(.*)(\\{[WUBRGXC]\\})(.*)to your mana pool");
+    private static final Pattern pattern = Pattern.compile(".*Add(.*)(\\{[WUBRGXC]\\})");
 
     public void analyseDeck() {
         HashMap<String, Integer> qtys = new HashMap<>();
@@ -1392,10 +1408,9 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                     // Adding mana
                     for (String str : card.getRules()) {
                         Matcher m = pattern.matcher(str);
-                        // ".*Add(.*)(\\{[WUBRGXC]\\})(.*)to your mana pool"
+                        // ".*Add(.*)(\\{[WUBRGXC]\\})(.*)"
                         while (m.find()) {
-                            System.out.println("0=" + m.group(0) + ",,,1=" + m.group(1) + ",,,2=" + m.group(2) + ",,,3=" + m.group(3));
-                            str = "Add" + m.group(1) + m.group(3) + "to your mana pool";
+                            str = "Add" + m.group(1);
                             int num = 1;
                             if (manaCounts.get(m.group(2)) != null) {
                                 num = manaCounts.get(m.group(2));
@@ -1704,6 +1719,10 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         JMenuItem invertSelection = new JMenuItem("Invert Selection");
         invertSelection.addActionListener(e2 -> invertSelection());
         menu.add(invertSelection);
+        
+        JMenuItem chooseMatching = new JMenuItem("Choose Matching");
+        chooseMatching.addActionListener(e2 -> chooseMatching());
+        menu.add(chooseMatching);
 
         // Show 'Duplicate Selection' for FREE_BUILDING
         if (this.mode == Constants.DeckEditorMode.FREE_BUILDING) {

@@ -43,7 +43,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.CastSpellLastTurnWatcher;
 
@@ -88,7 +88,7 @@ class ErayoSoratamiAscendantTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     private static Effect getFlipEffect() {
-        Effect effect = new FlipSourceEffect(new ErayosEssence());
+        Effect effect = new FlipSourceEffect(new ErayosEssenceToken());
         effect.setText("flip {this}");
         return effect;
     }
@@ -119,9 +119,9 @@ class ErayoSoratamiAscendantTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class ErayosEssence extends Token {
+class ErayosEssenceToken extends TokenImpl {
 
-    ErayosEssence() {
+    ErayosEssenceToken() {
         super("Erayo's Essence", "");
         addSuperType(SuperType.LEGENDARY);
         cardType.add(CardType.ENCHANTMENT);
@@ -132,6 +132,13 @@ class ErayosEssence extends Token {
         Effect effect = new CounterTargetEffect();
         effect.setText("counter that spell");
         this.addAbility(new ErayosEssenceTriggeredAbility(effect));
+    }
+    public ErayosEssenceToken(final ErayosEssenceToken token) {
+        super(token);
+    }
+
+    public ErayosEssenceToken copy() {
+        return new ErayosEssenceToken(this);
     }
 }
 

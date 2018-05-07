@@ -107,8 +107,8 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                         if (losePreviousTypes) {
                             permanent.getCardType().clear();
                         }
-                        for (CardType t : token.getCardType()) {
-                            permanent.addCardType(t);
+                        for (CardType cardType : token.getCardType()) {
+                            permanent.addCardType(cardType);
                         }
                         if (type != null && type.isEmpty() || type == null && permanent.isLand()) {
                             permanent.getSubtype(game).retainAll(SubType.getLandTypes(false));

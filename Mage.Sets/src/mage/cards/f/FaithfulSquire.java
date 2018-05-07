@@ -52,7 +52,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.events.GameEvent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -75,7 +75,7 @@ public class FaithfulSquire extends CardImpl {
 
         // At the beginning of the end step, if there are two or more ki counters on Faithful Squire, you may flip it
         this.addAbility(new ConditionalTriggeredAbility(
-                new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new FlipSourceEffect(new KaisoMemoryOfLoyalty()), true),
+                new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new FlipSourceEffect(new KaisoMemoryOfLoyaltyToken()), true),
                 new SourceHasCounterCondition(CounterType.KI, 2, Integer.MAX_VALUE),
                 "At the beginning of the end step, if there are two or more ki counters on {this}, you may flip it."));
 
@@ -91,9 +91,9 @@ public class FaithfulSquire extends CardImpl {
     }
 }
 
-class KaisoMemoryOfLoyalty extends Token {
+class KaisoMemoryOfLoyaltyToken extends TokenImpl {
 
-    KaisoMemoryOfLoyalty() {
+    KaisoMemoryOfLoyaltyToken() {
         super("Kaiso, Memory of Loyalty", "");
         addSuperType(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
@@ -112,5 +112,13 @@ class KaisoMemoryOfLoyalty extends Token {
                 new RemoveCountersSourceCost(CounterType.KI.createInstance()));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
+    }
+
+    public KaisoMemoryOfLoyaltyToken(final KaisoMemoryOfLoyaltyToken token) {
+        super(token);
+    }
+
+    public KaisoMemoryOfLoyaltyToken copy() {
+        return new KaisoMemoryOfLoyaltyToken(this);
     }
 }

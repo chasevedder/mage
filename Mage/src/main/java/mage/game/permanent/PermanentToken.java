@@ -46,7 +46,7 @@ public class PermanentToken extends PermanentImpl {
         super(controllerId, controllerId, token.getName());
         this.expansionSetCode = expansionSetCode;
         this.token = token.copy();
-        this.token.getAbilities().newId(); // neccessary if token has ability like DevourAbility()
+        this.token.getAbilities().newOriginalId(); // neccessary if token has ability like DevourAbility()
         this.token.getAbilities().setSourceId(objectId);
         this.power.modifyBaseValue(token.getPower().getBaseValueModified());
         this.toughness.modifyBaseValue(token.getToughness().getBaseValueModified());
@@ -84,7 +84,8 @@ public class PermanentToken extends PermanentImpl {
         for (ManaCost cost : token.getManaCost()) {
             this.getManaCost().add(cost.copy());
         }
-        this.cardType = token.getCardType();
+        this.cardType.clear();
+        this.cardType.addAll(token.getCardType());
         this.color = token.getColor(game).copy();
         this.frameColor = token.getFrameColor(game);
         this.frameStyle = token.getFrameStyle();
@@ -92,6 +93,7 @@ public class PermanentToken extends PermanentImpl {
         this.supertype.addAll(token.getSuperType());
         this.subtype.clear();
         this.subtype.addAll(token.getSubtype(game));
+        this.isAllCreatureTypes = token.isAllCreatureTypes();
         this.tokenDescriptor = token.getTokenDescriptor();
     }
 

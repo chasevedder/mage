@@ -57,7 +57,7 @@ public class MirenTheMoaningWell extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
         addSuperType(SuperType.LEGENDARY);
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {3}, {tap}, Sacrifice a creature: You gain life equal to the sacrificed creature's toughness.
@@ -101,7 +101,7 @@ class MirenTheMoaningWellEffect extends OneShotEffect {
                 if (cost instanceof SacrificeTargetCost) {
                     int amount = ((SacrificeTargetCost) cost).getPermanents().get(0).getToughness().getValue();
                     if (amount > 0) {
-                        controller.gainLife(amount, game);
+                        controller.gainLife(amount, game, source);
                     }
                 }
             }

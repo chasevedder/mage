@@ -40,6 +40,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
@@ -65,7 +66,9 @@ public class WindZendikon extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         
-        Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(new ElementalToken(), "Enchanted land is a 2/2 blue Elemental creature with flying.  It's still a land", Duration.WhileOnBattlefield));
+        Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(
+                new WindZendikonElementalToken(), "Enchanted land is a 2/2 blue Elemental creature with flying.  It's still a land",
+                Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.COLOR));
         this.addAbility(ability2);
         
         Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandAttachedEffect(), "enchanted land", false);
@@ -81,8 +84,8 @@ public class WindZendikon extends CardImpl {
         return new WindZendikon(this);
     }
 
-    class ElementalToken extends Token {
-        ElementalToken() {
+    class WindZendikonElementalToken extends TokenImpl {
+        WindZendikonElementalToken() {
             super("", "2/2 blue Elemental creature with flying");
             cardType.add(CardType.CREATURE);
             color.setBlue(true);
@@ -90,6 +93,13 @@ public class WindZendikon extends CardImpl {
             power = new MageInt(2);
             toughness = new MageInt(2);
             addAbility(FlyingAbility.getInstance());
+        }
+        public WindZendikonElementalToken(final WindZendikonElementalToken token) {
+            super(token);
+        }
+
+        public WindZendikonElementalToken copy() {
+            return new WindZendikonElementalToken(this);
         }
     }
 }

@@ -59,11 +59,11 @@ public class GraveBirthing extends CardImpl {
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
 
-        // Target opponent exiles a card from his or her graveyard. You create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C} to your mana pool."
+        // Target opponent exiles a card from their graveyard. You create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}."
         this.getSpellAbility().addEffect(new GraveBirthingEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
         Effect effect = new CreateTokenEffect(new EldraziScionToken());
-        effect.setText("You create a 1/1 colorless Eldrazi Scion creature token. It has \"Sacrifice this creature: Add {C} to your mana pool.\"<br>");
+        effect.setText("You create a 1/1 colorless Eldrazi Scion creature token. It has \"Sacrifice this creature: Add {C}.\"<br>");
         this.getSpellAbility().addEffect(effect);        // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
@@ -82,7 +82,7 @@ class GraveBirthingEffect extends OneShotEffect {
 
     public GraveBirthingEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Target opponent exiles a card from his or her graveyard";
+        this.staticText = "Target opponent exiles a card from their graveyard";
     }
 
     public GraveBirthingEffect(final GraveBirthingEffect effect) {

@@ -58,7 +58,7 @@ public class TempleOfAclazotz extends CardImpl {
         addSuperType(SuperType.LEGENDARY);
         this.nightCard = true;
 
-        // {T}: Add {B} to your mana pool
+        // {T}: Add {B}
         this.addAbility(new BlackManaAbility());
 
         // {T}, Sacrifice a creature: You gain life equal to the sacrificed creature’s toughness.
@@ -101,7 +101,7 @@ class TempleOfAclazotzEffect extends OneShotEffect {
                 if (cost instanceof SacrificeTargetCost) {
                     int amount = ((SacrificeTargetCost) cost).getPermanents().get(0).getToughness().getValue();
                     if (amount > 0) {
-                        controller.gainLife(amount, game);
+                        controller.gainLife(amount, game, source);
                     }
                 }
             }

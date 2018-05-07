@@ -108,7 +108,7 @@ public final class ZonesHandler {
                                 "order to put on top of library (last chosen will be topmost)", cards, owner, game)) {
                             game.getPlayer(card.getOwnerId()).getLibrary().putOnTop(card, game);
                         }
-                    } else {
+                    } else { // buttom
                         for (Card card : chooseOrder(
                                 "order to put on bottom of library (last chosen will be bottommost)", cards, owner, game)) {
                             game.getPlayer(card.getOwnerId()).getLibrary().putOnBottom(card, game);
@@ -134,12 +134,15 @@ public final class ZonesHandler {
                 case STACK:
                     // There should never be more than one card here.
                     for (Card card : cards.getCards(game)) {
+                        Spell spell;
                         if (info instanceof ZoneChangeInfo.Stack && ((ZoneChangeInfo.Stack) info).spell != null) {
-                            game.getStack().push(((ZoneChangeInfo.Stack) info).spell);
+                            spell = ((ZoneChangeInfo.Stack) info).spell;
                         } else {
-                            game.getStack().push(
-                                    new Spell(card, card.getSpellAbility().copy(), card.getOwnerId(), event.getFromZone()));
+                            spell = new Spell(card, card.getSpellAbility().copy(), card.getOwnerId(), event.getFromZone());
                         }
+                        game.getStack().push(spell);
+                        game.getState().setZone(spell.getId(), Zone.STACK);
+                        game.getState().setZone(card.getId(), Zone.STACK);
                     }
                     break;
                 case BATTLEFIELD:

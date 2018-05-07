@@ -93,10 +93,7 @@ class AvenShrineTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
         MageObject mageObject = game.getObject(sourceId);
-        if (spell != null
-                && !spell.isCopy()
-                && spell.getCard() != null
-                && !spell.getCard().isCopy()) {
+        if (spell != null) {
             game.getState().setValue("avenShrine" + mageObject, spell);
             return true;
         }
@@ -133,7 +130,7 @@ class AvenShrineEffect extends OneShotEffect {
                         count += player.getGraveyard().count(filterCardName, game);
                     }
                 }
-                controller.gainLife(count, game);
+                controller.gainLife(count, game, source);
                 return true;
             }
         }

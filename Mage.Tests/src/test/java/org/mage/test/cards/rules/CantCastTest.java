@@ -76,7 +76,7 @@ public class CantCastTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
 
-        // Blaze deals X damage to target creature or player.
+        // Blaze deals X damage to any target.
         addCard(Zone.HAND, playerA, "Blaze", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blaze", playerA);
@@ -102,7 +102,7 @@ public class CantCastTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
 
-        // Blaze deals X damage to target creature or player.
+        // Blaze deals X damage to any target.
         addCard(Zone.HAND, playerA, "Blaze", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blaze", playerB);
@@ -153,7 +153,7 @@ public class CantCastTest extends CardTestPlayerBase {
         // Your opponents can't block with creatures with even converted mana costs.
         addCard(Zone.BATTLEFIELD, playerB, "Void Winnower");
 
-        // Metalcraft - {T}: Add one mana of any color to your mana pool. Activate this ability only if you control three or more artifacts.
+        // Metalcraft - {T}: Add one mana of any color. Activate this ability only if you control three or more artifacts.
         addCard(Zone.HAND, playerA, "Mox Opal", 1); // {0}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mox Opal");
@@ -243,7 +243,7 @@ public class CantCastTest extends CardTestPlayerBase {
     @Test
     public void testAlhammarret() {
         // Flying
-        // As Alhammarret, High Arbiter enters the battlefield, each opponent reveals his or her hand. You choose the name of a nonland card revealed this way.
+        // As Alhammarret, High Arbiter enters the battlefield, each opponent reveals their hand. You choose the name of a nonland card revealed this way.
         // Your opponents can't cast spells with the chosen name.
         addCard(Zone.HAND, playerA, "Alhammarret, High Arbiter", 4); // Creature - {5}{U}{U}
         addCard(Zone.BATTLEFIELD, playerA, "Island", 7);

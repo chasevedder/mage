@@ -47,6 +47,7 @@ import mage.game.Game;
 import mage.game.GameState;
 import mage.game.combat.CombatGroup;
 import mage.game.command.Emblem;
+import mage.game.command.Plane;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
@@ -139,10 +140,16 @@ public class GameView implements Serializable {
                         stack.put(stackObject.getId(),
                                 new StackAbilityView(game, (StackAbility) stackObject, object.getName(), cardView));
                         checkPaid(stackObject.getId(), ((StackAbility) stackObject));
+                    } else if (object instanceof Plane) {
+                        CardView cardView = new CardView(new PlaneView((Plane) object));
+                        ((StackAbility) stackObject).setName(((Plane) object).getName());
+                        stack.put(stackObject.getId(),
+                                new StackAbilityView(game, (StackAbility) stackObject, object.getName(), cardView));
+                        checkPaid(stackObject.getId(), ((StackAbility) stackObject));
                     } else if (object instanceof Designation) {
                         Designation designation = (Designation) game.getObject(object.getId());
                         if (designation != null) {
-                            stack.put(stackObject.getId(), new CardView(designation, (StackAbility) stackObject));
+                            stack.put(stackObject.getId(), new StackAbilityView(game, (StackAbility) stackObject, designation.getName(), new CardView(designation)));
                         } else {
                             LOGGER.fatal("Designation object not found: " + object.getName() + ' ' + object.toString() + ' ' + object.getClass().toString());
                         }

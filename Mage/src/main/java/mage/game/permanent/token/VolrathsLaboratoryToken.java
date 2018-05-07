@@ -36,13 +36,13 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class VolrathsLaboratoryToken extends Token {
+public class VolrathsLaboratoryToken extends TokenImpl {
 
     public VolrathsLaboratoryToken() {
         this(null, null);
     }
     public VolrathsLaboratoryToken(ObjectColor color, SubType type) {
-        super(type.getDescription(), "2/2 creature token of the chosen color and type");
+        super(type != null ? type.getDescription() : "", "2/2 creature token of the chosen color and type");
         cardType.add(CardType.CREATURE);
         if (color != null) {
             this.color.setColor(color);
@@ -52,5 +52,13 @@ public class VolrathsLaboratoryToken extends Token {
         }
         power = new MageInt(2);
         toughness = new MageInt(2);
+    }
+
+    public VolrathsLaboratoryToken(final VolrathsLaboratoryToken token) {
+        super(token);
+    }
+
+    public VolrathsLaboratoryToken copy() {
+        return new VolrathsLaboratoryToken(this);
     }
 }

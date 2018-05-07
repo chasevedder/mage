@@ -57,8 +57,8 @@ public class TalentOfTheTelepath extends CardImpl {
     public TalentOfTheTelepath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}{U}");
 
-        // Target opponent reveals the top seven cards of his or her library. You may cast an instant or sorcery card from among them without paying its mana cost. Then that player puts the rest into his or her graveyard.
-        // <i>Spell mastery</i> - If there are two or more instant and/or sorcery cards in your graveyard, you may cast up to two revealed instant and/or sorcery cards instead of one.
+        // Target opponent reveals the top seven cards of their library. You may cast an instant or sorcery card from among them without paying its mana cost. Then that player puts the rest into their graveyard.
+        // <i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, you may cast up to two revealed instant and/or sorcery cards instead of one.
         getSpellAbility().addEffect(new TalentOfTheTelepathEffect());
         getSpellAbility().addTarget(new TargetOpponent());
 
@@ -80,8 +80,8 @@ class TalentOfTheTelepathEffect extends OneShotEffect {
 
     public TalentOfTheTelepathEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "Target opponent reveals the top seven cards of his or her library. You may cast an instant or sorcery card from among them without paying its mana cost. Then that player puts the rest into his or her graveyard. "
-                + "<BR><i>Spell mastery</i> - If there are two or more instant and/or sorcery cards in your graveyard, you may cast up to two revealed instant and/or sorcery cards instead of one.";
+        this.staticText = "Target opponent reveals the top seven cards of their library. You may cast an instant or sorcery card from among them without paying its mana cost. Then that player puts the rest into their graveyard. "
+                + "<BR><i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, you may cast up to two revealed instant and/or sorcery cards instead of one.";
     }
 
     public TalentOfTheTelepathEffect(final TalentOfTheTelepathEffect effect) {

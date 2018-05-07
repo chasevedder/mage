@@ -140,7 +140,12 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public void setLife(int life, Game game) {
+    public void setLife(int life, Game game, Ability source) {
+
+    }
+
+    @Override
+    public void setLife(int life, Game game, UUID sourceId) {
 
     }
 
@@ -150,7 +155,12 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public int gainLife(int amount, Game game) {
+    public int gainLife(int amount, Game game, Ability source) {
+        return 0;
+    }
+
+    @Override
+    public int gainLife(int amount, Game game, UUID sourceId) {
         return 0;
     }
 
@@ -1266,6 +1276,39 @@ public class PlayerStub implements Player {
     @Override
     public List<Designation> getDesignations() {
         return null;
+    }
+
+    @Override
+    public PlanarDieRoll rollPlanarDie(Game game) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public PlanarDieRoll rollPlanarDie(Game game, ArrayList<UUID> appliedEffects) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public PlanarDieRoll rollPlanarDie(Game game, ArrayList<UUID> appliedEffects, int numberChaosSides, int numberPlanarSides) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Player obj = (Player) o;
+        if (this.getId() == null || obj.getId() == null) {
+            return false;
+        }
+
+        return this.getId().equals(obj.getId());
     }
 
 }

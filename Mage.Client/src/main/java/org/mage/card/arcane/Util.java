@@ -1,5 +1,7 @@
 package org.mage.card.arcane;
 
+import mage.util.StreamUtils;
+
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -37,9 +39,13 @@ public final class Util {
     }
 
     public static void broadcast(byte[] data, int port) throws IOException {
-        DatagramSocket socket = new DatagramSocket();
-        broadcast(socket, data, port, NetworkInterface.getNetworkInterfaces());
-        socket.close();
+        DatagramSocket socket = null;
+        try {
+            socket = new DatagramSocket();
+            broadcast(socket, data, port, NetworkInterface.getNetworkInterfaces());
+        } finally {
+            StreamUtils.closeQuietly(socket);
+        }
     }
 
     private static void broadcast(DatagramSocket socket, byte[] data, int port, Enumeration<NetworkInterface> ifaces)

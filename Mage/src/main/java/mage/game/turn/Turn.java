@@ -132,7 +132,7 @@ public class Turn implements Serializable {
         }
 
         if (game.getState().getTurnMods().skipTurn(activePlayer.getId())) {
-            game.informPlayers(activePlayer.getLogName() + " skips his or her turn.");
+            game.informPlayers(activePlayer.getLogName() + " skips their turn.");
             return true;
         }
         logStartOfTurn(game, activePlayer);
@@ -284,7 +284,7 @@ public class Turn implements Serializable {
             if (stackObject instanceof Spell) {
                 ((Spell) stackObject).moveToExile(null, "", source.getSourceId(), game);
             } else {
-                game.getStack().remove(stackObject); // stack ability
+                game.getStack().remove(stackObject, game); // stack ability
             }
         }
         // 2) All attacking and blocking creatures are removed from combat.

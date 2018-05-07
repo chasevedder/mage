@@ -37,7 +37,9 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.CreatureToken;
 
 /**
  *
@@ -50,7 +52,7 @@ public class NaturesRevolt extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{G}");
 
         // All lands are 2/2 creatures that are still lands.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAllEffect(new NaturesRevoltToken(),
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAllEffect(new CreatureToken(2, 2),
                 "lands", new FilterLandPermanent(), Duration.WhileOnBattlefield)));
     }
 
@@ -61,15 +63,5 @@ public class NaturesRevolt extends CardImpl {
     @Override
     public NaturesRevolt copy() {
         return new NaturesRevolt(this);
-    }
-}
-
-class NaturesRevoltToken extends Token {
-
-    public NaturesRevoltToken() {
-        super("Land", "2/2 creatures");
-        cardType.add(CardType.CREATURE);
-        power = new MageInt(2);
-        toughness = new MageInt(2);
     }
 }

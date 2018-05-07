@@ -41,7 +41,9 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetArtifactPermanent;
 
@@ -65,7 +67,7 @@ public class EnsoulArtifact extends CardImpl {
 
         // Enchanted artifact is a creature with base power and toughness 5/5 in addition to its other types.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
-            new BecomesCreatureAttachedEffect(new EnsoulArtifactToken(), "Enchanted artifact is a creature with base power and toughness 5/5 in addition to its other types", Duration.WhileOnBattlefield)
+            new BecomesCreatureAttachedEffect(new CreatureToken(5, 5), "Enchanted artifact is a creature with base power and toughness 5/5 in addition to its other types", Duration.WhileOnBattlefield)
         ));
 
     }
@@ -77,15 +79,5 @@ public class EnsoulArtifact extends CardImpl {
     @Override
     public EnsoulArtifact copy() {
         return new EnsoulArtifact(this);
-    }
-}
-
-class EnsoulArtifactToken extends Token {
-
-    EnsoulArtifactToken() {
-        super("", "5/5");
-        cardType.add(CardType.CREATURE);
-        power = new MageInt(5);
-        toughness = new MageInt(5);
     }
 }

@@ -360,10 +360,12 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Unmask", 168, Rarity.RARE, mage.cards.u.Unmask.class));
         cards.add(new SetCardInfo("Uphill Battle", 222, Rarity.UNCOMMON, mage.cards.u.UphillBattle.class));
         cards.add(new SetCardInfo("Vendetta", 170, Rarity.COMMON, mage.cards.v.Vendetta.class));
+        cards.add(new SetCardInfo("Venomous Breath", 281, Rarity.UNCOMMON, mage.cards.v.VenomousBreath.class));
         cards.add(new SetCardInfo("Venomous Dragonfly", 282, Rarity.COMMON, mage.cards.v.VenomousDragonfly.class));
         cards.add(new SetCardInfo("Vernal Equinox", 283, Rarity.RARE, mage.cards.v.VernalEquinox.class));
         cards.add(new SetCardInfo("Vine Dryad", 284, Rarity.RARE, mage.cards.v.VineDryad.class));
         cards.add(new SetCardInfo("Vine Trellis", 285, Rarity.COMMON, mage.cards.v.VineTrellis.class));
+        cards.add(new SetCardInfo("Volcanic Wind", 223, Rarity.UNCOMMON, mage.cards.v.VolcanicWind.class));
         cards.add(new SetCardInfo("Wall of Distortion", 171, Rarity.COMMON, mage.cards.w.WallOfDistortion.class));
         cards.add(new SetCardInfo("War Cadence", 224, Rarity.UNCOMMON, mage.cards.w.WarCadence.class));
         cards.add(new SetCardInfo("War Tax", 113, Rarity.UNCOMMON, mage.cards.w.WarTax.class));

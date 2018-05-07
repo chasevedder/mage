@@ -46,6 +46,7 @@ public class TournamentOptions implements Serializable {
     protected MatchOptions matchOptions;
     protected LimitedOptions limitedOptions;
     protected boolean watchingAllowed = true;
+    protected boolean planeChase = false;
     protected int numberRounds;
     protected String password;
     protected int quitRatio;
@@ -90,6 +91,15 @@ public class TournamentOptions implements Serializable {
     public void setWatchingAllowed(boolean watchingAllowed) {
         this.watchingAllowed = watchingAllowed;
     }
+
+    public boolean isPlaneChase() {
+        return planeChase;
+    }
+
+    public void setPlaneChase(boolean planeChase) {
+        this.planeChase = planeChase;
+        this.matchOptions.setPlaneChase(planeChase);
+    }    
 
     public int getNumberRounds() {
         return numberRounds;

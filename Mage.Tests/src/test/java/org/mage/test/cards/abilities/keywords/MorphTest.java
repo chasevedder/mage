@@ -603,7 +603,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         // Flying, haste
         // Other creatures you control have haste.
-        // Whenever an opponent casts a creature or planeswalker spell with the same name as a card in his or her graveyard, that player loses 10 life.
+        // Whenever an opponent casts a creature or planeswalker spell with the same name as a card in their graveyard, that player loses 10 life.
         addCard(Zone.BATTLEFIELD, playerB, "Dragonlord Kolaghan", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akroma, Angel of Fury");
@@ -671,9 +671,9 @@ public class MorphTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
 
-        //Tap: Add {G}, {U}, or {R} to your mana pool.
+        //Tap: Add {G}, {U}, or {R}.
         // Morph 2 (You may cast this card face down as a 2/2 creature for 3. Turn it face up any time for its morph cost.)
-        // When Rattleclaw Mystic is turned face up, add {G}{U}{R} to your mana pool.
+        // When Rattleclaw Mystic is turned face up, add {G}{U}{R}.
         addCard(Zone.BATTLEFIELD, playerB, "Rattleclaw Mystic"); // 2/1
         addCard(Zone.BATTLEFIELD, playerB, "Forest");
         addCard(Zone.BATTLEFIELD, playerB, "Island");
@@ -709,9 +709,9 @@ public class MorphTest extends CardTestPlayerBase {
     @Test
     public void testReflectorMageBouncesMorphCreatureReplayAsFaceup() {
 
-        //Tap: Add {G}, {U}, or {R} to your mana pool.
+        //Tap: Add {G}, {U}, or {R}.
         // Morph 2 (You may cast this card face down as a 2/2 creature for 3. Turn it face up any time for its morph cost.)
-        // When Rattleclaw Mystic is turned face up, add {G}{U}{R} to your mana pool.
+        // When Rattleclaw Mystic is turned face up, add {G}{U}{R}.
         addCard(Zone.HAND, playerA, "Rattleclaw Mystic"); // 2/1
         addCard(Zone.BATTLEFIELD, playerA, "Forest");
         addCard(Zone.BATTLEFIELD, playerA, "Island");
@@ -751,7 +751,7 @@ public class MorphTest extends CardTestPlayerBase {
     public void testVesuvanShapeshifter() {
 
         // Morph {5}{U}{U}
-        // When Brine Elemental is turned face up, each opponent skips his or her next untap step.
+        // When Brine Elemental is turned face up, each opponent skips their next untap step.
         addCard(Zone.HAND, playerA, "Brine Elemental"); // Creature {4}{U}{U} 5/4
         addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
 
@@ -876,7 +876,7 @@ public class MorphTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
 
         // Each creature has "When this creature dies, choose target opponent. That player puts this card from its owner's graveyard
-        // onto the battlefield under his or her control at the beginning of the next end step."
+        // onto the battlefield under their control at the beginning of the next end step."
         addCard(Zone.BATTLEFIELD, playerA, "Endless Whispers", 1);
 
         addCard(Zone.HAND, playerB, "Lightning Bolt");

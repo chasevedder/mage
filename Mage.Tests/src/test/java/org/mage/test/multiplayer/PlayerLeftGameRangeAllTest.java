@@ -166,7 +166,7 @@ public class PlayerLeftGameRangeAllTest extends CardTestMultiPlayerBase {
     public void TestOtherPlayerPlaneswalkerCreatedEmblem() {
         // +1: Scry 1, then draw a card.
         // -2: Return target creature to its owner's hand.
-        // -8: You get an emblem with "Whenever an opponent casts his or her first spell each turn, counter that spell."
+        // -8: You get an emblem with "Whenever an opponent casts their first spell each turn, counter that spell."
         addCard(Zone.BATTLEFIELD, playerC, "Jace, Unraveler of Secrets");
         addCounters(1, PhaseStep.DRAW, playerC, "Jace, Unraveler of Secrets", CounterType.LOYALTY, 8);
 
@@ -305,6 +305,49 @@ public class PlayerLeftGameRangeAllTest extends CardTestMultiPlayerBase {
 
         assertHandCount(playerA, 3);
         assertLife(playerA, 4);
+
+    }
+
+    /**
+     *  * 11/4/2015: In a multiplayer game, if Grasp of Fate's owner leaves the
+     * game, the exiled cards will return to the battlefield. Because the
+     * one-shot effect that returns the cards isn't an ability that goes on the
+     * stack, it won't cease to exist along with the leaving player's spells and
+     * abilities on the stack.
+     */
+    @Test
+    public void TestGraspOfFateReturn() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        // When Grasp of Fate enters the battlefield, for each opponent, exile up to one target nonland permanent that player
+        // controls until Grasp of Fate leaves the battlefield.
+        addCard(Zone.HAND, playerA, "Grasp of Fate"); // Enchantment {1}{W}{W}
+
+        addCard(Zone.BATTLEFIELD, playerB, "Pillarfield Ox", 1);
+
+        addCard(Zone.HAND, playerC, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerC, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerC, "Juggernaut", 1);
+
+        addCard(Zone.BATTLEFIELD, playerD, "Silvercoat Lion", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grasp of Fate");
+        addTarget(playerA, "Pillarfield Ox");
+        addTarget(playerA, "Juggernaut");
+        addTarget(playerA, "Silvercoat Lion");
+
+        castSpell(2, PhaseStep.BEGIN_COMBAT, playerC, "Lightning Bolt", playerA);
+
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerC, "Lightning Bolt", 1);
+
+        assertLife(playerA, -1);
+        Assert.assertFalse("Player D is no longer in the game", playerA.isInGame());
+
+        assertPermanentCount(playerB, "Pillarfield Ox", 1);
+        assertPermanentCount(playerC, "Juggernaut", 1);
+        assertPermanentCount(playerD, "Silvercoat Lion", 1);
 
     }
 }

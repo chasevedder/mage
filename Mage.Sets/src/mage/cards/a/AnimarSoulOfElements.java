@@ -36,9 +36,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.keyword.ProtectionAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -56,7 +54,7 @@ import mage.util.CardUtil;
 public class AnimarSoulOfElements extends CardImpl {
 
     public AnimarSoulOfElements(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{U}{R}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
 
@@ -111,15 +109,11 @@ class AnimarCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility) {
+        if (abilityToModify instanceof SpellAbility) {
             if (abilityToModify.getControllerId().equals(source.getControllerId())) {
                 Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
                 if (spell != null) {
                     return spell.isCreature();
-                } else {
-                    // used at least for flashback ability because Flashback ability doesn't use stack or for getPlayables where spell is not cast yet
-                    Card sourceCard = game.getCard(abilityToModify.getSourceId());
-                    return sourceCard != null && sourceCard.isCreature();
                 }
             }
         }
